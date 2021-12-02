@@ -22,8 +22,8 @@ const Counter = () => {
     setCount((prevState) => prevState - 1);
   };
 
-  const handleTagChange = () => {
-    setTags(['tag4', 'tag5']);
+  const handleTagChange = (id) => {
+    setTags((prevState) => prevState.filter((tag) => tag !== id));
   };
 
   return (
@@ -33,7 +33,7 @@ const Counter = () => {
           <li
             key={tag}
             className="btn btn-primary m-2"
-            onClick={handleTagChange}
+            onClick={() => handleTagChange(tag)}
           >
             {tag}
           </li>
