@@ -21,15 +21,31 @@ const CountersList = () => {
     setCounters(initialState);
   };
 
+  const handleIncrement = (id) => {
+    const updateCounters = [...counters];
+    updateCounters.map((c) =>
+      c.id === id && c.value >= 0 ? (c.value += 1) : c.value
+    );
+    setCounters(updateCounters);
+  };
+
+  const handleDecrement = (id) => {
+    const updateCounters = [...counters];
+    updateCounters.map((c) =>
+      c.id === id && c.value > 0 ? (c.value -= 1) : c.value
+    );
+    setCounters(updateCounters);
+  };
+
   return (
     <>
       {counters.map((count) => (
         <Counter
           key={count.id}
-          id={count.id}
-          value={count.value}
-          name={count.name}
+          {...count}
           onDelete={handleDelete}
+          onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
         />
       ))}
       <button className="btn btn-danger m-2" onClick={handleReset}>
